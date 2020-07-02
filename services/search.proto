@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package protop.registry.services;
+
+service SearchService {
+  rpc Search(SearchQuery) returns (stream SearchResult) {}
+}
+
+message SearchQuery {
+  oneof query {
+    ExplicitMatchers explicit_matchers = 1;
+    AnyMatch any_match = 2;
+  }
+}
+
+// Explicitly search for matches in the given properties.
+message ExplicitMatchers {
+  string organization_id = 1;
+  string package_id = 2;
+  string description = 3;
+  repeated string keywords = 4;
+}
+
+message AnyMatch {
+  string value = 1;
+}
+
+message SearchResult {
+  int32 remaining_results = 1;
+  PackageDetails package_details = 2;
+  PackageStatistics package_statistics = 3;
+}
+
+message PackageDetails {
+  string organization_id = 1;
+  string package_id = 2;
+  string package_version = 3;
+  string description = 4;
+}
+
+message PackageStatistics {
+  int32 total_downloads = 1;
+  int32 total_direct_dependents = 2;
+}

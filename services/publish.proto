@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package protop.registry.services;
+
+import "data/package.proto";
+
+service PublishService {
+  rpc Publish(stream protop.registry.data.DataChunk) returns (stream PublishStatus) {}
+}
+
+message PublishStatus {
+  int64 chunks_received = 1;
+}
