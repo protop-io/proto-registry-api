@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package io.protop.registry.services;
+
+import "io/protop/registry/data/package.proto";
+
+service PublishService {
+  rpc Publish(stream PublishRequest) returns (stream PublishStatus) {}
+}
+
+message PublishRequest {
+  oneof manifest_or_data {
+    Manifest manifest = 1;
+    io.protop.registry.data.DataChunk data = 2;
+  }
+}
+
+message Manifest {
+  string organization = 1;
+  string project = 2;
+  string version = 3;
+  string description = 4;
+  repeated Dependency dependencies = 5;
+  string readme = 6;
+  string homepage = 7;
+  string license = 8;
+  repeated string keywords = 9;
+}
+
+message Dependency {
+  string package_id = 1;
+  string source = 2;
+}
+
+message PublishStatus {
+  int64 chunks_received = 1;
+}

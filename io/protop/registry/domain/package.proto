@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package io.protop.registry.domain;
+
+message PackageMetadata {
+  string organization = 1;
+  string project = 2;
+  string version = 3;
+  string description = 4;
+  string readme = 5;
+  string homepage = 6;
+  string license = 7;
+  repeated Dependency dependencies = 8;
+  repeated string keywords = 9;
+}
+
+message Dependency {
+  string package_id = 1;
+  string source = 2;
+}

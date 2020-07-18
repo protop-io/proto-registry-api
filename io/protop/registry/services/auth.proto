@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package io.protop.registry.services;
+
+service AuthService {
+  rpc CreateToken(CreateTokenRequest) returns (CreateTokenResponse);
+}
+
+message CreateTokenRequest {
+  string client_id = 1;
+  string client_secret = 2;
+}
+message CreateTokenResponse {
+  string token = 1;
+  int64 expires_in = 3;
+}

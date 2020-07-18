@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package io.protop.registry.services;
+
+import "io/protop/registry/data/package.proto";
+import "io/protop/registry/domain/package.proto";
+
+service RetrievalService {
+
+  // Retrieve a package's metadata. If the version is not specified, it will be the latest version.
+  rpc RetrieveMetadata(PackageQuery) returns (io.protop.registry.domain.PackageMetadata) {}
+  
+  // Retrieve a package. If the version is not specified, it will be the latest version.
+  rpc Retrieve(PackageQuery) returns (io.protop.registry.data.DataChunk) {}
+}
+
+message PackageQuery {
+  string package_id = 1;
+  string version = 2;
+}

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package protop.registry.services;
+package io.protop.registry.services;
 
 service SearchService {
   rpc Search(SearchQuery) returns (stream SearchResult) {}
@@ -11,6 +11,7 @@ message SearchQuery {
     ExplicitMatchers explicit_matchers = 1;
     AnyMatch any_match = 2;
   }
+  int32 results_limit = 3;
 }
 
 // Explicitly search for matches in the given properties.
@@ -33,8 +34,8 @@ message SearchResult {
 
 message PackageDetails {
   string organization_id = 1;
-  string package_id = 2;
-  string package_version = 3;
+  string project_id = 2;
+  string version = 3;
   string description = 4;
 }
 

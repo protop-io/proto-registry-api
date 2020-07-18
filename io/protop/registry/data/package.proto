@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package protop.registry.data;
+package io.protop.registry.data;
 
 message DataChunk {
   bytes data = 1;
